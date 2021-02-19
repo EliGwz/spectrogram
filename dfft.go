@@ -6,7 +6,7 @@ import (
 	"math/cmplx"
 )
 
-func drawfft(img draw.Image, samples []float64, rate, bins uint32, RECTANGLE, DFT, MAG, LOG10 bool) {
+func Drawfft(img draw.Image, samples []float64, rate, bins uint32, RECTANGLE, DFT, MAG, LOG10 bool) {
 	bn := img.Bounds()
 
 	gr := New()

@@ -31,7 +31,7 @@ func (p *PngImage) At(x int, y int) color.Color {
 	}
 }
 
-func savePng(img *Image128, fileName string) error {
+func SavePng(img *Image128, fileName string) error {
 	pi := &PngImage{img: img}
 
 	outFile, err := os.Create(fileName)

@@ -7,7 +7,7 @@ import (
 	"math"
 )
 
-func drawwav(img draw.Image, samples []float64, BG1, FG0, FG1, RUL string, HIDERULERS, HIDEAVG bool, RATIO float64) {
+func Drawwav(img draw.Image, samples []float64, BG1, FG0, FG1, RUL string, HIDERULERS, HIDEAVG bool, RATIO float64) {
 	bn := img.Bounds()
 
 	bg1 := ParseColor(BG1)
