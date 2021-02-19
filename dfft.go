@@ -37,9 +37,9 @@ func Drawfft(img draw.Image, samples []float64, rate, bins uint32, RECTANGLE, DF
 
 		var freqs []complex128
 		if DFT {
-			freqs = dft(sub)
+			freqs = calDft(sub)
 		} else {
-			freqs = fft(sub)
+			freqs = calFft(sub)
 		}
 		max := 0.0
 		for y := 0; y < int(bins); y++ {

@@ -7,7 +7,7 @@ import (
 	"scientificgo.org/fft"
 )
 
-func dft(input []float64) []complex128 {
+func calDft(input []float64) []complex128 {
 	output := make([]complex128, len(input))
 
 	arg := -2.0 * math.Pi / float64(len(input))
@@ -41,7 +41,7 @@ func dft(input []float64) []complex128 {
 //	}
 //}
 
-func fft(samples []float64) []complex128 {
+func calFft(samples []float64) []complex128 {
 	//n := len(samples)
 	//freqs := make([]complex128, n)
 	//hfft(samples, freqs, n, 1)
