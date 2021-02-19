@@ -3,6 +3,8 @@ package spectrogram
 import (
 	"math"
 	"math/cmplx"
+
+	"scientificgo.org/fft"
 )
 
 func dft(input []float64) []complex128 {
@@ -20,28 +22,35 @@ func dft(input []float64) []complex128 {
 	return output
 }
 
-func hfft(samples []float64, freqs []complex128, n, step int) {
-	if n == 1 {
-		freqs[0] = complex(samples[0], 0)
-		return
-	}
-
-	half := n / 2
-
-	hfft(samples, freqs, half, 2*step)
-	hfft(samples[step:], freqs[half:], half, 2*step)
-
-	for k := 0; k < half; k++ {
-		a := -2 * math.Pi * float64(k) / float64(n)
-		e := cmplx.Rect(1, a) * freqs[k+half]
-
-		freqs[k], freqs[k+half] = freqs[k]+e, freqs[k]-e
-	}
-}
+//func hfft(samples []float64, freqs []complex128, n, step int) {
+//	if n == 1 {
+//		freqs[0] = complex(samples[0], 0)
+//		return
+//	}
+//
+//	half := n / 2
+//
+//	hfft(samples, freqs, half, 2*step)
+//	hfft(samples[step:], freqs[half:], half, 2*step)
+//
+//	for k := 0; k < half; k++ {
+//		a := -2 * math.Pi * float64(k) / float64(n)
+//		e := cmplx.Rect(1, a) * freqs[k+half]
+//
+//		freqs[k], freqs[k+half] = freqs[k]+e, freqs[k]-e
+//	}
+//}
 
 func fft(samples []float64) []complex128 {
-	n := len(samples)
-	freqs := make([]complex128, n)
-	hfft(samples, freqs, n, 1)
-	return freqs
+	//n := len(samples)
+	//freqs := make([]complex128, n)
+	//hfft(samples, freqs, n, 1)
+	//return freqs
+
+	var input []complex128
+	for _, d := range samples {
+		input = append(input, complex(d, 0))
+	}
+	output := fft.Fft(input, false)
+	return output
 }
