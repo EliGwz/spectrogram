@@ -1,4 +1,4 @@
-package main
+package spectrogram
 
 import (
 	"image/draw"
@@ -6,7 +6,7 @@ import (
 	"math/cmplx"
 )
 
-func drawfft(img draw.Image, samples []float64, rate, bins uint32) {
+func drawfft(img draw.Image, samples []float64, rate, bins uint32, RECTANGLE, DFT, MAG, LOG10 bool) {
 	bn := img.Bounds()
 
 	gr := New()
@@ -29,14 +29,14 @@ func drawfft(img draw.Image, samples []float64, rate, bins uint32) {
 				s = samples[n]
 			}
 			tmp := 1.0
-			if !*RECTANGLE {
+			if !RECTANGLE {
 				tmp = 0.54 - 0.46*math.Cos(float64(i)*math.Pi*2/float64(len(sub)))
 			}
 			sub[i] = s * tmp
 		}
 
 		var freqs []complex128
-		if *DFT {
+		if DFT {
 			freqs = dft(sub)
 		} else {
 			freqs = fft(sub)
@@ -50,12 +50,12 @@ func drawfft(img draw.Image, samples []float64, rate, bins uint32) {
 		for y := 0; y < int(bins); y++ {
 			c := freqs[y]
 			r := 0.0
-			if *MAG {
+			if MAG {
 				r = math.Pow(real(c), 2) + math.Pow(imag(c), 2)
 			} else {
 				r = cmplx.Abs(c)
 			}
-			if *LOG10 {
+			if LOG10 {
 				// TODO
 				r = float64(bins) * math.Log10(r/max)
 			}
