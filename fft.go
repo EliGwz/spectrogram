@@ -2,7 +2,6 @@ package spectrogram
 
 import (
 	"math"
-	"math/cmplx"
 
 	"scientificgo.org/fft"
 )
